@@ -15,7 +15,7 @@ namespace ProcessMeme
         }
 
         [FunctionName("ProcessMeme")]
-        public void Run([ServiceBusTrigger("textmessages", "memesfinder", Connection = "ServiceBusOptions")]string mySbMsg)
+        public void Run([ServiceBusTrigger("keywordmessages", "memeprocessor", Connection = "ServiceBusOptions")]string mySbMsg)
         {
             _logger.LogInformation($"C# ServiceBus topic trigger function processed message: {mySbMsg}");
         }
