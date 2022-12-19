@@ -14,16 +14,10 @@ namespace ProcessMeme
 
         public override void Configure(IFunctionsHostBuilder builder)
         {
+            _functionConfig = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
+                .Build();
 
-            var configBuilder = new ConfigurationBuilder()
-                .AddEnvironmentVariables();
-
-            if (builder.IsProduction())
-                configBuilder.AddAzureKeyVault(
-                    new Uri($"https://{builder.GetContext().Configuration["KeyVaultName"]}.vault.azure.net/"),
-                    new DefaultAzureCredential());
-
-            _functionConfig = configBuilder.Build();
             builder.Services.AddLogging();
         }
     }
