@@ -33,4 +33,9 @@
     <Folder Include="Extensions\" />
     <Folder Include="Options\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProcessMeme.Infrastructure\ProcessMeme.Infrastructure.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

@@ -9,9 +9,16 @@
   <ItemGroup>
     <None Remove="SearchEngine\" />
     <None Remove="Infrastructure\" />
+    <None Remove="Google.Apis.Customsearch.v1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SearchEngine\" />
     <Folder Include="Infrastructure\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProcessMeme.Interfaces\ProcessMeme.Interfaces.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Google.Apis.Customsearch.v1" Version="1.49.0.2084" />
   </ItemGroup>
 </Project>

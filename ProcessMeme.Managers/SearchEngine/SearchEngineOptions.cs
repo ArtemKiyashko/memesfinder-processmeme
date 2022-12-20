@@ -1,5 +1,5 @@
 ﻿using System;
-namespace ProcessMeme.Options
+namespace ProcessMeme.Managers.SearchEngine
 {
 	public class SearchEngineOptions
 	{

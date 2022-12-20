@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessMeme.Managers", "ProcessMeme.Managers\ProcessMeme.Managers.csproj", "{471044DE-0510-41C0-8727-E2C4C2842A06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessMeme.Infrastructure", "ProcessMeme.Infrastructure\ProcessMeme.Infrastructure.csproj", "{14CF2225-4C69-4024-94D2-A615BF896CEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{471044DE-0510-41C0-8727-E2C4C2842A06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{471044DE-0510-41C0-8727-E2C4C2842A06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{471044DE-0510-41C0-8727-E2C4C2842A06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14CF2225-4C69-4024-94D2-A615BF896CEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14CF2225-4C69-4024-94D2-A615BF896CEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14CF2225-4C69-4024-94D2-A615BF896CEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14CF2225-4C69-4024-94D2-A615BF896CEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
