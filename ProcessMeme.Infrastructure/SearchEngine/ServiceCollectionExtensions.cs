@@ -31,6 +31,7 @@ namespace ProcessMeme.Infrastructure.SearchEngine
 
                 var listRequest = client.Cse.List();
 				listRequest.Cx = options.EngineId;
+				listRequest.SearchType = ListRequest.SearchTypeEnum.Image;
 				return listRequest;
 			});
             return services;

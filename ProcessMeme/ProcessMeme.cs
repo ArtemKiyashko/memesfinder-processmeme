@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.WebJobs;
+﻿using System.Threading.Tasks;
+using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using ProcessMeme.Interfaces.SearchEngine;
 
@@ -16,7 +17,7 @@ namespace ProcessMeme
         }
 
         [FunctionName("ProcessMeme")]
-        public void Run([ServiceBusTrigger("keywordmessages", "memeprocessor", Connection = "ServiceBusOptions")]string mySbMsg)
+        public async Task Run([ServiceBusTrigger("keywordmessages", "memeprocessor", Connection = "ServiceBusOptions")]string mySbMsg)
         {
             _logger.LogInformation($"C# ServiceBus topic trigger function processed message: {mySbMsg}");
         }
