@@ -5,7 +5,7 @@ namespace ProcessMeme.Interfaces.SearchEngine
 {
 	public interface IGoogleSearchEngine
 	{
-		public ValueTask<IList<Result>> GetMemesAsync(string query);
+		public ValueTask<IList<Result>> GetMemesAsync(string keyword);
 	}
 }
 

@@ -12,9 +12,9 @@ namespace ProcessMeme.Managers.SearchEngine
             _googleSearchEngine = googleSearchEngine;
         }
 
-        public async ValueTask<string?> GetMemeLinkAsync(string query)
+        public async ValueTask<string?> GetMemeLinkAsync(string keyword)
         {
-            var memesResult = await _googleSearchEngine.GetMemesAsync(query);
+            var memesResult = await _googleSearchEngine.GetMemesAsync(keyword);
             return memesResult.GetRandomResult()?.Link;
         }
     }

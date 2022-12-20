@@ -20,9 +20,9 @@ namespace ProcessMeme.Managers.SearchEngine
             _listRequest = listRequest;
         }
 
-        public async ValueTask<IList<Result>> GetMemesAsync(string query)
+        public async ValueTask<IList<Result>> GetMemesAsync(string keyword)
         {
-            var searchQuery = _searchTextProvider.GetSearchText(query);
+            var searchQuery = _searchTextProvider.GetSearchText(keyword);
             _listRequest.Q = searchQuery;
 
             var searchResults = await _listRequest.ExecuteAsync();
