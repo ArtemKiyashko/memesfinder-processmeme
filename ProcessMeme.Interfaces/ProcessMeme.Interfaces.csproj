@@ -1,18 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Telegram.Bot" />
+    <None Remove="Google.Apis.Customsearch.v1" />
+    <None Remove="Infrastructure\" />
+    <None Remove="SearchEngine\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Telegram.Bot" Version="18.0.0" />
+    <PackageReference Include="Google.Apis.Customsearch.v1" Version="1.49.0.2084" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProcessMeme.Models\ProcessMeme.Models.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+    <Folder Include="SearchEngine\" />
   </ItemGroup>
 </Project>
