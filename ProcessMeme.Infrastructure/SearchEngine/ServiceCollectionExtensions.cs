@@ -33,6 +33,8 @@ namespace ProcessMeme.Infrastructure.SearchEngine
 				listRequest.Cx = options.EngineId;
 				listRequest.SearchType = ListRequest.SearchTypeEnum.Image;
 				listRequest.Cr = options.CountryRestriction;
+				listRequest.SiteSearch = options.SitesToExclude;
+				listRequest.SiteSearchFilter = ListRequest.SiteSearchFilterEnum.E;
 				return listRequest;
 			});
             return services;
