@@ -32,6 +32,7 @@ namespace ProcessMeme.Infrastructure.SearchEngine
                 var listRequest = client.Cse.List();
 				listRequest.Cx = options.EngineId;
 				listRequest.SearchType = ListRequest.SearchTypeEnum.Image;
+				listRequest.Cr = options.CountryRestriction;
 				return listRequest;
 			});
             return services;
