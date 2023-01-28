@@ -24,6 +24,7 @@ namespace ProcessMeme
 
             builder.Services.Configure<TelegramBotOptions>(_functionConfig.GetSection("TelegramBotOptions"));
             builder.Services.AddSingleton<ITelegramBotClient>(factory => new TelegramBotClient(factory.GetService<IOptions<TelegramBotOptions>>().Value.Token));
+
         }
     }
 }
