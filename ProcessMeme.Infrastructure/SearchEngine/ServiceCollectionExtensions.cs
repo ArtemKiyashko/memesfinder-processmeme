@@ -21,7 +21,7 @@ namespace ProcessMeme.Infrastructure.SearchEngine
 
             services.AddTransient<IGoogleSearchEngine, GoogleSearchEngine>();
             services.AddTransient<GoogleSearchEngineManager>();
-            services.AddSingleton<IGoogleSearchEngineManager, LoggedGoogleSearchEngineManager>(
+            services.AddScoped<IGoogleSearchEngineManager, LoggedGoogleSearchEngineManager>(
                 fabric => new LoggedGoogleSearchEngineManager(fabric.GetRequiredService<GoogleSearchEngineManager>(),
                 fabric.GetRequiredService<ILogger<LoggedGoogleSearchEngineManager>>()));
             services.AddSingleton<CustomsearchService>(provider =>
