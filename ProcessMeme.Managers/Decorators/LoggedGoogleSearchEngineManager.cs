@@ -6,9 +6,9 @@ namespace ProcessMeme.Managers.Decorators
     public class LoggedGoogleSearchEngineManager : IGoogleSearchEngineManager
     {
         private IGoogleSearchEngineManager _decorotee;
-        private ILogger _logger;
+        private ILogger<LoggedGoogleSearchEngineManager> _logger;
 
-        public LoggedGoogleSearchEngineManager(IGoogleSearchEngineManager decorotee, ILogger logger)
+        public LoggedGoogleSearchEngineManager(IGoogleSearchEngineManager decorotee, ILogger<LoggedGoogleSearchEngineManager> logger)
         {
             _decorotee = decorotee;
             _logger = logger;
