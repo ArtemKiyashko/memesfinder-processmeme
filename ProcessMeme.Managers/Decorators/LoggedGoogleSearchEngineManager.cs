@@ -14,12 +14,18 @@ namespace ProcessMeme.Managers.Decorators
             _logger = logger;
         }
 
-        public async ValueTask<string?> GetMemeLinkAsync(string keyword)
+        public async ValueTask SearchMemesAsync(string keyword)
         {
             _logger.LogInformation("Keyword is: {}", keyword);
-            var memeLink = await _decorotee.GetMemeLinkAsync(keyword);
-            _logger.LogInformation("Meme link is: {}", memeLink);
-            return memeLink;
+            await _decorotee.SearchMemesAsync(keyword);
+        }
+
+        public string GetNextRandomMemeUrl()
+        {
+            _logger.LogInformation("Getting next meme URL");
+            var memeUrl = _decorotee.GetNextRandomMemeUrl();
+            _logger.LogInformation($"Meme link is: {memeUrl}");
+            return memeUrl;
         }
     }
 }

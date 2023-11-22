@@ -1,10 +1,13 @@
 ﻿using MemesFinderTextProcessor.Models;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
+using Polly;
 using ProcessMeme.Interfaces.SearchEngine;
 using System;
 using System.Threading.Tasks;
 using Telegram.Bot;
+using Telegram.Bot.Exceptions;
+using Telegram.Bot.Types;
 
 namespace ProcessMeme
 {
@@ -14,7 +17,10 @@ namespace ProcessMeme
         private readonly IGoogleSearchEngineManager _googleSearchEngineManager;
         private readonly ITelegramBotClient _telegramBotClient;
 
-        public ProcessMeme(ILogger<ProcessMeme> log, IGoogleSearchEngineManager googleSearchEngineManager, ITelegramBotClient telegramBotClient)
+        public ProcessMeme(
+            ILogger<ProcessMeme> log,
+            IGoogleSearchEngineManager googleSearchEngineManager,
+            ITelegramBotClient telegramBotClient)
         {
             _logger = log;
             _googleSearchEngineManager = googleSearchEngineManager;
@@ -24,29 +30,27 @@ namespace ProcessMeme
         [FunctionName("ProcessMeme")]
         public async Task Run([ServiceBusTrigger("keywordmessages", "memeprocessor", Connection = "ServiceBusOptions")] TgMessageModel tgMessageModel)
         {
-            //keyword search
-            var memeLink = await _googleSearchEngineManager.GetMemeLinkAsync(tgMessageModel.Keyword);
-            //check if meme link is not null or empty
-            if (string.IsNullOrEmpty(memeLink))
-            {
-                _logger.LogError("Link is null or empty");
-                return;
-            }
-
-            //try send meme
             try
             {
-                await _telegramBotClient.SendPhotoAsync(
-                    chatId: tgMessageModel.Message.Chat.Id,
-                    replyToMessageId: tgMessageModel.Message.MessageId,
-                    photo: memeLink);
+                //keyword search
+                await _googleSearchEngineManager.SearchMemesAsync(tgMessageModel.Keyword);
+
+                await Policy
+                    .Handle<ApiRequestException>()
+                    .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
+                    .ExecuteAsync(async () => {
+                        //try send meme
+                        await _telegramBotClient.SendPhotoAsync(
+                            chatId: tgMessageModel.Message.Chat.Id,
+                            replyToMessageId: tgMessageModel.Message.MessageId,
+                            photo: InputFile.FromString(_googleSearchEngineManager.GetNextRandomMemeUrl()));
+                    });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Cant send meme with URL: {memeLink}");
+                _logger.LogError(ex, $"Cant send any meme by keyword: {tgMessageModel.Keyword}");
                 return;
             }
-            Console.WriteLine(memeLink);
         }
     }
 }
