@@ -3,7 +3,8 @@ namespace ProcessMeme.Interfaces.SearchEngine
 {
 	public interface IGoogleSearchEngineManager
 	{
-		public ValueTask<string?> GetMemeLinkAsync(string keyword);
+		public ValueTask SearchMemesAsync(string keyword);
+		public string GetNextRandomMemeUrl();
 	}
 }
 
