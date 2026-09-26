@@ -1,5 +1,5 @@
 ﻿using MemesFinderTextProcessor.Models;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Polly;
 using ProcessMeme.Interfaces.SearchEngine;
