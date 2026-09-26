@@ -1,5 +1,5 @@
 ﻿using MemesFinderTextProcessor.Models;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Polly;
 using ProcessMeme.Interfaces.SearchEngine;
@@ -27,7 +27,7 @@ namespace ProcessMeme
             _telegramBotClient = telegramBotClient;
         }
 
-        [FunctionName("ProcessMeme")]
+        [Function("ProcessMeme")]
         public async Task Run([ServiceBusTrigger("keywordmessages", "memeprocessor", Connection = "ServiceBusOptions")] TgMessageModel tgMessageModel)
         {
             try
