@@ -34,6 +34,12 @@ namespace ProcessMeme
             {
                 //keyword search
                 await _googleSearchEngineManager.SearchMemesAsync(tgMessageModel.Keyword);
+                var memeUrl = _googleSearchEngineManager.GetNextRandomMemeUrl();
+                if (string.IsNullOrWhiteSpace(memeUrl))
+                {
+                    _logger.LogWarning("No usable meme image was found for query {Query}; skipping Telegram reply.", tgMessageModel.Keyword);
+                    return;
+                }
 
                 await Policy
                     .Handle<ApiRequestException>()
@@ -43,7 +49,7 @@ namespace ProcessMeme
                         await _telegramBotClient.SendPhotoAsync(
                             chatId: tgMessageModel.Message.Chat.Id,
                             replyToMessageId: tgMessageModel.Message.MessageId,
-                            photo: InputFile.FromString(_googleSearchEngineManager.GetNextRandomMemeUrl()));
+                            photo: InputFile.FromString(memeUrl));
                     });
             }
             catch (Exception ex)

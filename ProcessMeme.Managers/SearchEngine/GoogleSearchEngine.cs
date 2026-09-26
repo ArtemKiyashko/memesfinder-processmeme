@@ -27,7 +27,7 @@ namespace ProcessMeme.Managers.SearchEngine
 
             var searchResults = await _listRequest.ExecuteAsync();
 
-            return searchResults.Items;
+            return searchResults.Items ?? new List<Result>();
         }
     }
 }
