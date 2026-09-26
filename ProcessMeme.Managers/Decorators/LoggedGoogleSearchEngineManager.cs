@@ -20,7 +20,7 @@ namespace ProcessMeme.Managers.Decorators
             await _decorotee.SearchMemesAsync(keyword);
         }
 
-        public string GetNextRandomMemeUrl()
+        public string? GetNextRandomMemeUrl()
         {
             _logger.LogInformation("Getting next meme URL");
             var memeUrl = _decorotee.GetNextRandomMemeUrl();
